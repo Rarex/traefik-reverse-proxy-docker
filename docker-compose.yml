@@ -1,0 +1,20 @@
+version: "3.7"
+services:
+  reverse-proxy:
+    image: traefik:v2.9
+    ports:
+      - "${PORT_80_TO-80}:80"
+      - "${PORT_8080_TO-8080}:8080"
+    command:
+      - --api.insecure=true
+      - --providers.docker.exposedByDefault=false
+      - --providers.docker.network=${NETWORK_NAME-proxy}
+#      - --accessLog=true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - traefik-proxy
+
+networks:
+  traefik-proxy:
+    name: ${NETWORK_NAME-proxy}
