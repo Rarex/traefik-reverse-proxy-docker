@@ -14,10 +14,10 @@ cp .env.example .env
 
 ### Your projects setup
 
-#### Disable port mapping used by traefik
+#### Disable port mapping that used by traefik (e.g. `80`, `443`, `8080`) 
 
 ```
-#    ports:
+     ports:
 #      - "80:80"
 #      - "443:443"
 #      - "8080:8080"
@@ -66,7 +66,7 @@ Traefik network name can be changed in `.env` file
             name: proxy
 ```
 
-#### If you need interaction between services from different containers
+#### For interaction between services from different containers
 
 Add network and alias to destination service
 
@@ -111,7 +111,7 @@ If you want to use urls like `front.dev.local`, `back.dev.local` instead of `fro
     127.0.0.1 front.dev.local back.dev.local
 ```
 
-Or use some DNS Proxy (e.g `Acrylic DNS Proxy`), so u can use wildcards config
+Or use some DNS Proxy (e.g `Acrylic DNS Proxy`), so you will be able to use wildcards config
 
 ```
     127.0.0.1 *.dev.local
@@ -119,14 +119,15 @@ Or use some DNS Proxy (e.g `Acrylic DNS Proxy`), so u can use wildcards config
 
 Using `Acrylic` with `WSL2` may cause some issues with port `:53` used by them. Change `Acrylic` config `LocalIPv4BindingAddress=0.0.0.0` to `LocalIPv4BindingAddress=127.0.0.1` to solve it.
 
-#### Using https
+### Https
+#### Http to https redirect
 Http to https redirect enabled for all hosts by default. If you want to control redirect manually comment following lines at `docker-compose.yml`
 ```
 #      - --entrypoints.web.http.redirections.entryPoint.to=websecure
 #      - --entrypoints.web.http.redirections.entryPoint.scheme=https
 #      - --entrypoints.web.http.redirections.entryPoint.permanent=true
 ```
-Add labels to service
+Add labels to service you want to be redirected
 ```
     service-name
         ...
