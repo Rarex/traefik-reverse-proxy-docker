@@ -1,2 +1,10 @@
 .idea
 .env
+/certs/localhost.crt
+/certs/localhost.csr
+/certs/localhost.key
+/certs/RootCA.crt
+/certs/RootCA.key
+/certs/RootCA.pem
+/certs/RootCA.srl
+/certs/domains.ext
